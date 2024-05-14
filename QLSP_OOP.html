@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QLSP</title>
+</head>
+<button onclick="showList()">List</button>
+<button onclick="showFormAdd()">Add</button>
+<div id="disp"></div>
+<body>
+<script>
+    let listProduct = [
+        {
+            name: 'Ip15',
+            price: 19000000
+        },
+        {
+            name: 'S23 Ultra',
+            price: 26000000
+        }, {
+            name: 'S24',
+            price: 22000000
+        }
+    ];
+    showList()
+    function showList() {
+        let str = '<h1>Danh sách sản phẩm</h1>'
+        str += `<p>Số lượng sản phẩm: ${listProduct.length}</p>`
+        for (let i = 0; i < listProduct.length; i++) {
+            str += `<h3>${listProduct[i].name}, ${listProduct[i].price}<button onclick="edit(${i})">Edit</button></h3>`
+        }
+        document.getElementById('disp').innerHTML = str;
+    }
+
+    function showFormAdd() {
+        let str = `<input id = "ten" placeholder="Tên sp"> <input id = "gia" placeholder="Giá sp"> <button onclick="add()">Create</button>`
+        document.getElementById('disp').innerHTML = str;
+    }
+
+    function add() {
+        let newProduct = {
+            name: document.getElementById('ten').value,
+            price: +document.getElementById('gia').value
+        }
+        listProduct.push(newProduct);
+        showList();
+    }
+
+    function edit(index) {
+        let str = `<input id = "ten" value="${listProduct[index].name}"> <input id = "gia" value="${listProduct[index].price}"> <button onclick="save(${index})">Save</button>`
+        document.getElementById('disp').innerHTML = str;
+    }
+    function save(index) {
+        listProduct[index].name = document.getElementById('ten').value;
+        listProduct[index].price = document.getElementById('gia').value;
+        showList();
+    }
+</script>
+</body>
+</html>
